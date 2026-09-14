@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: lenny-growth-api
+    runtime: docker
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lenny-growth-db
+          property: connectionString
+      - key: DEFAULT_LLM_PROVIDER
+        value: ollama
+      - key: OLLAMA_BASE_URL
+        value: https://your-ollama-service.example.com
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-3-5-haiku-latest
+databases:
+  - name: lenny-growth-db
+    databaseName: lenny_growth
+    user: lenny

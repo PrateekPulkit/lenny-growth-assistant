@@ -1,0 +1,29 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+backend/.venv/
+
+# JavaScript
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Local runtime data and logs
+data/
+logs/
+agent-transcripts/*.log
+!agent-transcripts/.gitkeep
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

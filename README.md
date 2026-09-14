@@ -1,8 +1,11 @@
 # Lenny Growth Assistant
 
+> **Engineered with precision by [Prateek Pulkit](https://github.com/PrateekPulkit)**  
+> *Forward Deployed Systems & Full-Stack Engineering Assignment*
+
 A production-minded, source-grounded product and growth research workspace built for Lenny's Podcast transcripts. It combines persistent chat, cited retrieval, model switching, Ship 30-style writing artifacts, and a safe in-app artifact viewer.
 
-![Architecture](https://img.shields.io/badge/architecture-FastAPI%20%2B%20React-243b68) ![Local model](https://img.shields.io/badge/local%20model-Ollama-7c4dff) ![Database](https://img.shields.io/badge/database-PostgreSQL%20%2B%20pgvector-4169e1)
+![Author](https://img.shields.io/badge/Author-Prateek%20Pulkit-d77c47?style=flat&logo=github) ![Architecture](https://img.shields.io/badge/architecture-FastAPI%20%2B%20React-243b68) ![Local model](https://img.shields.io/badge/local%20model-Ollama-7c4dff) ![Database](https://img.shields.io/badge/database-PostgreSQL%20%2B%20pgvector-4169e1)
 
 ## Why it exists
 
@@ -157,3 +160,12 @@ GitHub Pages can host only the static Vite frontend; it cannot run FastAPI, Post
 ## Handoff and extension paths
 
 The code separates retrieval, LLM routing, artifacts, and API contracts to keep future work contained. Natural next steps are upstream authentication, a protected admin ingestion screen, queue-backed ingestion, user feedback capture, source-level retention controls, model latency/cost metrics, and a source refresh scheduler. See the PRD for intentional scope boundaries and the architecture document for component ownership.
+
+---
+
+## Author & Engineering Lead
+
+**Designed, engineered, and delivered by [Prateek Pulkit](https://github.com/PrateekPulkit)**  
+*Forward Deployed Systems & Full-Stack Engineer*  
+GitHub: [@PrateekPulkit](https://github.com/PrateekPulkit)
+

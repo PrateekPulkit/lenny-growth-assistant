@@ -16,6 +16,10 @@ class SessionCreate(BaseModel):
     provider: Literal["ollama", "anthropic"] | None = None
 
 
+class SessionUpdate(BaseModel):
+    title: str = Field(min_length=1, max_length=160)
+
+
 class SessionOut(BaseModel):
     id: UUID
     title: str

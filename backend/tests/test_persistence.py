@@ -87,3 +87,22 @@ def test_source_document_and_chunks():
     )
     assert chunk.sequence == 0
     assert len(chunk.embedding) == 768
+
+
+def test_session_update_schema():
+    from app.schemas import SessionUpdate
+    update = SessionUpdate(title="Refined Title")
+    assert update.title == "Refined Title"
+
+    with pytest.raises(ValidationError):
+        SessionUpdate(title="")
+
+
+def test_session_cascade_artifacts():
+    from app.models import Artifact
+    session = ChatSession(id=uuid.uuid4(), title="Test session")
+    artifact = Artifact(session_id=session.id, title="Test Essay", kind="markdown", content="Essay content")
+    session.artifacts.append(artifact)
+    assert len(session.artifacts) == 1
+    assert session.artifacts[0].title == "Test Essay"
+

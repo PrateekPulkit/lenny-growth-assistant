@@ -9,7 +9,7 @@ from sqlalchemy.orm import selectinload
 from app.core.config import get_settings
 from app.db import get_db
 from app.models import Artifact, ChatSession, Message
-from app.schemas import ArtifactOut, ChatResponse, CitationOut, HealthOut, IngestRequest, IngestResponse, MessageCreate, MessageOut, SessionCreate, SessionOut
+from app.schemas import ArtifactOut, ChatResponse, CitationOut, HealthOut, IngestRequest, IngestResponse, MessageCreate, MessageOut, SessionCreate, SessionOut, SessionUpdate
 from app.services.artifacts import ArtifactService
 from app.services.llm import LLMService, LLMUnavailableError
 from app.services.retrieval import RetrievalService
@@ -59,6 +59,27 @@ async def list_sessions(user_id: str | None = Query(default=None, max_length=120
     if user_id:
         statement = statement.where(ChatSession.user_id == user_id)
     return [session_out(item) for item in (await db.scalars(statement)).all()]
+
+
+@router.patch("/sessions/{session_id}", response_model=SessionOut, tags=["chat"])
+async def update_session(session_id: UUID, payload: SessionUpdate, db: AsyncSession = Depends(get_db)) -> SessionOut:
+    session = await db.get(ChatSession, session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Chat session was not found.")
+    session.title = payload.title.strip()
+    session.updated_at = datetime.now(timezone.utc)
+    await db.commit()
+    await db.refresh(session)
+    return session_out(session)
+
+
+@router.delete("/sessions/{session_id}", status_code=status.HTTP_204_NO_CONTENT, tags=["chat"])
+async def delete_session(session_id: UUID, db: AsyncSession = Depends(get_db)) -> None:
+    session = await db.get(ChatSession, session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Chat session was not found.")
+    await db.delete(session)
+    await db.commit()
 
 
 @router.get("/sessions/{session_id}/messages", response_model=list[MessageOut], tags=["chat"])

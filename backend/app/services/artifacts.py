@@ -1,7 +1,7 @@
 from app.services.llm import LLMService
 from app.services.retrieval import RetrievedChunk
 
-SHIP30_SYSTEM = """You are a Ship 30 for 30 writing skill. Turn only the supplied grounded research into a useful essay. Use a sharp, curiosity-provoking opening; make one clear argument; use informative H2 headings, short paragraphs, bullets only when they improve scanning, and selective bold emphasis. End with a concrete takeaway. Never manufacture examples, statistics, or source claims. Target 1,100-1,350 words unless the evidence is too thin, in which case say so. Return only the requested artifact, no code fence."""
+SHIP30_SYSTEM = """You are a Ship 30 for 30 writing skill. Turn only the supplied grounded research into a useful essay. Use a sharp, curiosity-provoking opening; make one clear argument; use informative H2 headings, short paragraphs, bullets only when they improve scanning, and selective bold emphasis. End with a concrete takeaway. Never manufacture examples, statistics, or source claims. Target 450-650 words with crisp, atomic takeaways unless the evidence is too thin, in which case say so. Return only the requested artifact, no code fence."""
 
 
 class ArtifactService:

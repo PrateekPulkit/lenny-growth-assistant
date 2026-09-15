@@ -37,7 +37,7 @@ class LLMService:
             return GenerationResult(content="".join(block.text for block in response.content if hasattr(block, "text")), model=self.settings.anthropic_model)
         try:
             async with httpx.AsyncClient(timeout=180) as client:
-                response = await client.post(f"{self.settings.ollama_base_url.rstrip('/')}/api/chat", json={"model": self.settings.ollama_model, "stream": False, "messages": [{"role": "system", "content": system}, *messages], "options": {"temperature": 0.2}})
+                response = await client.post(f"{self.settings.ollama_base_url.rstrip('/')}/api/chat", json={"model": self.settings.ollama_model, "stream": False, "messages": [{"role": "system", "content": system}, *messages], "options": {"temperature": 0.2, "num_thread": 8}})
                 response.raise_for_status()
                 data = response.json()
                 return GenerationResult(content=data["message"]["content"], model=data.get("model", self.settings.ollama_model))

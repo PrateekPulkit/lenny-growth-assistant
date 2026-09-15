@@ -13,10 +13,14 @@ services:
       retries: 10
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
 
   ollama:
     image: ollama/ollama:latest
     restart: unless-stopped
+    ports:
+      - "11434:11434"
     volumes:
       - ollama_data:/root/.ollama
 

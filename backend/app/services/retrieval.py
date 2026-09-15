@@ -41,7 +41,8 @@ class RetrievalService:
         self.embeddings = embeddings or EmbeddingService()
 
     async def ingest_url(self, db: AsyncSession, source_url: str, title: str | None = None) -> tuple[SourceDocument, int]:
-        async with httpx.AsyncClient(timeout=30, follow_redirects=True) as client:
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
+        async with httpx.AsyncClient(timeout=30, follow_redirects=True, headers=headers) as client:
             response = await client.get(source_url)
             response.raise_for_status()
         soup = BeautifulSoup(response.text, "html.parser")

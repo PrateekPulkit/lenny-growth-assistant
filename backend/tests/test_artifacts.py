@@ -12,7 +12,7 @@ def test_ship30_system_prompt_principles():
     assert "one clear argument" in SHIP30_SYSTEM
     assert "concrete takeaway" in SHIP30_SYSTEM
     assert "Never manufacture examples" in SHIP30_SYSTEM
-    assert "Target 1,100-1,350 words" in SHIP30_SYSTEM
+    assert "Target 450-650 words" in SHIP30_SYSTEM
 
 
 @pytest.mark.asyncio

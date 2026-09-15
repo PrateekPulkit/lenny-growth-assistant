@@ -16,9 +16,15 @@ configure_logging(settings.log_level)
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    await initialise_database()
+    try:
+        await initialise_database()
+    except Exception as exc:
+        logger.warning("database_initialisation_failed", extra={"error": str(exc)})
     yield
-    await close_database()
+    try:
+        await close_database()
+    except Exception:
+        pass
 
 
 app = FastAPI(title=settings.app_name, version="1.0.0", lifespan=lifespan)

@@ -36,7 +36,7 @@ class LLMService:
             response = await client.messages.create(model=self.settings.anthropic_model, max_tokens=1400, system=system, messages=messages)
             return GenerationResult(content="".join(block.text for block in response.content if hasattr(block, "text")), model=self.settings.anthropic_model)
         try:
-            async with httpx.AsyncClient(timeout=70) as client:
+            async with httpx.AsyncClient(timeout=180) as client:
                 response = await client.post(f"{self.settings.ollama_base_url.rstrip('/')}/api/chat", json={"model": self.settings.ollama_model, "stream": False, "messages": [{"role": "system", "content": system}, *messages], "options": {"temperature": 0.2}})
                 response.raise_for_status()
                 data = response.json()
